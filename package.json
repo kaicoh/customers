@@ -1,0 +1,26 @@
+{
+  "name": "customers",
+  "version": "1.0.0",
+  "description": "顧客管理サービス",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaicoh/customers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaicoh/customers/issues"
+  },
+  "homepage": "https://github.com/kaicoh/customers#readme",
+  "devDependencies": {
+    "serverless": "^2.46.0",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-pseudo-parameters": "^2.5.0",
+    "serverless-rust": "^0.3.8"
+  }
+}
