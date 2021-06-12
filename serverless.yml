@@ -1,0 +1,39 @@
+service: customers
+
+provider:
+  name: aws
+  runtime: rust
+  # NOTE: overwrite with your own profile
+  profile: kanji
+  region: ap-northeast-1
+  stage: dev
+  environment: ${file(./sls/env.yml)}
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  rust: ${file(./sls/plugins/rust.yml)}
+  settings: ${file(./sls/settings.yml)}
+  objectPrefix: ${self:service}-${self:custom.stage}
+  resources: ${file(./sls/resources.yml)}
+
+plugins:
+  - serverless-rust
+  - serverless-pseudo-parameters
+  - serverless-iam-roles-per-function
+
+package:
+  individually: true
+
+functions:
+  create:
+    handler: functions.create
+    name: ${self:custom.objectPrefix}-create
+    events:
+      - http:
+          path: /
+          method: post
+    iamRoleStatements:
+      - ${file(./sls/iam.yml):putProfiles}
+
+resources:
+  - ${file(./sls/cloudformation/dynamodb.yml)}

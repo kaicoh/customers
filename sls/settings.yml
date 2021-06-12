@@ -1,0 +1,3 @@
+logLevel:
+  dev: debug
+  prod: info
